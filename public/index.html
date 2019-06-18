@@ -6,7 +6,43 @@
     <title>Micro Benchmark with Prime Numbers</title>
   </head>
   <body>
+    <h1>Prime Number Performance</h1>
+    <script src="prime.js"></script>
+    <script>
+
+        // Numbers to check 0 - primes
+        const primes = 200000
+
+        // JS Prime number checkers
+        const isPrime = num => {
+          for (let i = 2; i < num; i++) {
+            if (num % i === 0) return false;
+          }
+          return num !== 1 && num !== 0
+        }
+
+        // Check number 0 - {primes}
+        const checkPrimes = num => {
+          let count = 0
+          for (let i = 0; i < num; i++) {
+            if (isPrime(i)) count++
+          }
+          return count
+        }
+
+        // Check both JS & C once the WASM is ready
+        Module['onRuntimeInitialized'] = () => {
+
+          // Check JS
+          let jsStart = performance.now()
+          let jsPrimes = checkPrimes(primes)
+          console.log('JS', jsPrimes, Math.round(performance.now() - jsStart)/1000)
+
+          // Check c
+          let cStart = performance.now()
+          let cPrimes = _checkPrimes(primes)
+          console.log('C', cPrimes, Math.round(performance.now() - cStart)/1000)
+        }
     </script>
-    <script src=""></script>
   </body>
 </html>
