@@ -1,0 +1,11 @@
+{
+  "name": "primenumbers_wasm",
+  "version": "1.0.0",
+  "description": "Micro Benchmark with Prime Numbers",
+  "main": "serve.js",
+  "author": "Marco A Molinaro",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
